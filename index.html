@@ -508,7 +508,7 @@ footer{
           <div class="info-row"><span class="ico">📍</span> Kanpur, Uttar Pradesh, India</div>
           <div class="info-row"><span class="ico">🏫</span> 12th Grade · Currently Studying</div>
           <div class="info-row"><span class="ico">🏢</span> Founder · BringItUp Agency</div>
-          <div class="info-row"><span class="ico">✉️</span> abhinav.s.pvt@gmail.com</div>
+          <div class="info-row"><span class="ico">✉️</span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f0919298999e9186de83de808684b0979d91999cde939f9d">[email&#160;protected]</a></div>
         </div>
       </div>
       <div class="about-right-stack reveal">
@@ -672,9 +672,9 @@ footer{
         <h2 class="sec-title">Let's Build<br>Something</h2>
         <p class="contact-intro">Got a project idea, want a website built, or just want to connect? I'm open to freelance work, collaborations, and interesting opportunities.</p>
         <div class="contact-links">
-          <a href="mailto:abhinav.s.pvt@gmail.com" class="contact-link">
+          <a href="/cdn-cgi/l/email-protection#badbd8d2d3d4dbcc94c994cacccefaddd7dbd3d694d9d5d7" class="contact-link">
             <div class="cl-icon o">✉️</div>
-            <div><span class="cl-label">Email</span><span class="cl-val">abhinav.s.pvt@gmail.com</span></div>
+            <div><span class="cl-label">Email</span><span class="cl-val"><span class="__cf_email__" data-cfemail="60010208090e01164e134e10161420070d01090c4e030f0d">[email&#160;protected]</span></span></div>
           </a>
           <a href="https://www.linkedin.com/in/abhi9av-singh" target="_blank" class="contact-link">
             <div class="cl-icon b">🔗</div>
@@ -690,21 +690,24 @@ footer{
         <div class="cf-title">Send a Message</div>
         <div class="cf-sub">I'll get back to you within 24 hours.</div>
         <form class="cf-grid" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="access_key" value="c94f7888-888e-4673-8f5e-7812c6cddb4c">
+          <input type="hidden" name="subject" value="New message from thinkwithabhinav.in">
+          <input type="checkbox" name="botcheck" style="display:none">
           <div class="cf-field">
             <label>Your Name</label>
-            <input type="text" placeholder="Full name" required>
+            <input type="text" name="name" placeholder="Full name" required>
           </div>
           <div class="cf-field">
             <label>Email</label>
-            <input type="email" placeholder="your@email.com" required>
+            <input type="email" name="email" placeholder="your@email.com" required>
           </div>
           <div class="cf-field full">
             <label>Subject</label>
-            <input type="text" placeholder="What's this about?">
+            <input type="text" name="subject" placeholder="What's this about?">
           </div>
           <div class="cf-field full">
             <label>Message</label>
-            <textarea rows="4" placeholder="Tell me about your project..." required></textarea>
+            <textarea name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
           </div>
           <div class="cf-submit">
             <button type="submit" class="btn-submit">Send Message →</button>
@@ -720,13 +723,13 @@ footer{
 <footer>
   <div class="footer-name">Abhinav Pratap Singh</div>
   <div class="footer-links">
-    <a href="mailto:abhinav.s.pvt@gmail.com">Email</a>
+    <a href="/cdn-cgi/l/email-protection#4524272d2c2b24336b366b353331052228242c296b262a28">Email</a>
     <a href="https://www.linkedin.com/in/abhi9av-singh" target="_blank">LinkedIn</a>
   </div>
   <div class="footer-copy">© 2025 · Kanpur, India</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 90);
@@ -734,24 +737,29 @@ const obs = new IntersectionObserver(entries => {
 }, {threshold: 0.1});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
   const btn = e.target.querySelector('.btn-submit');
-  btn.textContent = '✓ Message Sent!';
-  btn.style.background = '#10b981';
-  setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; e.target.reset(); }, 3000);
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  const formData = new FormData(e.target);
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+    const data = await res.json();
+    if (data.success) {
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#10b981';
+      e.target.reset();
+    } else {
+      btn.textContent = 'Failed. Try Again.';
+      btn.style.background = '#ef4444';
+    }
+  } catch {
+    btn.textContent = 'Failed. Try Again.';
+    btn.style.background = '#ef4444';
+  }
+  setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.disabled = false; }, 3000);
 }
 
 const secs = document.querySelectorAll('section[id]');
-const navAs = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let cur = '';
-  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
-  navAs.forEach(a => {
-    if (a.getAttribute('href') === '#' + cur) { a.style.color = 'var(--orange)'; a.style.background = 'var(--orange-light)'; }
-    else { a.style.color = ''; a.style.background = ''; }
-  });
-});
-</script>
-</body>
-</html>
+const navAs = d
