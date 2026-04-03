@@ -762,4 +762,14 @@ async function handleSubmit(e) {
 }
 
 const secs = document.querySelectorAll('section[id]');
-const navAs = d
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navAs.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--orange)' : '';
+  });
+});
+</script>
+</body>
+</html>
